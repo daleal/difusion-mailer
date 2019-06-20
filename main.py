@@ -3,6 +3,7 @@ This module builds and executes the mailer system.
 """
 
 
+import os
 import sys
 import csv
 import requests
@@ -32,6 +33,24 @@ def get_template():
     with open('template.txt', 'r', encoding='utf-8') as raw_template:
         template = raw_template.read()
     return template.strip()
+
+
+def get_files():
+    """Loads the mail attachments."""
+    if not os.path.exists('attachments'):
+        return []
+    directory = os.fsencode(directory_in_str)
+    for attachment in os.listdir(directory):
+        filename = os.fsdecode(attachment)
+        print(filename)
+
+
+def generate_message(tamplate, subject, **kwargs):
+    """
+    Generates the message with the necessary information.
+    """
+    if not os.path.exists('attachments'):
+        pass
 
 
 def send_report(template, subject, **kwargs):

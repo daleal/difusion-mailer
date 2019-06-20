@@ -6,6 +6,11 @@ This module contains the necessary parameters to make the mailer work.
 import json
 
 
+DATABASE_LOCATION = ''
+TARGET_DATABASE = 'mail_list.csv'
+
+ATTACHMENTS_FOLDER_NAME = 'attachments'
+
 # Para usar el mailer, rellenar con el mail a usar
 MAIL_SENDER = ''
 

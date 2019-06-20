@@ -9,8 +9,8 @@ from parameters import MAIL_SENDER
 
 try:
     # Install dependencies
-    with open('requirements.txt', 'r') as requirements:
-        libraries = [x.strip() for x in requirements.readlines()]
+    with open('requirements.txt', 'r') as reqs:
+        libraries = [x.strip().split("==")[0] for x in reqs.readlines()]
     for library in libraries:
         subprocess.check_call(
             [sys.executable, '-m', 'pip', 'install', '--user', library])

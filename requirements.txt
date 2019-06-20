@@ -1,5 +1,3 @@
-requests
-google-api-python-client
-httplib2
-oauth2client
-flask
+httplib2==0.13.0
+requests==2.22.0
+google_api_python_client==1.7.9

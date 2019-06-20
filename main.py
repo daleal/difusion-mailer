@@ -24,7 +24,7 @@ def get_target_data():
 def get_mail_title():
     """Gets the title for the mail."""
     trailing = sys.argv[1:]
-    return 'Sample Difussion' if not trailing else " ".join(trailing)
+    return 'Sample Diffusion' if not trailing else " ".join(trailing)
 
 
 def get_template():

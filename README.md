@@ -37,7 +37,7 @@ Once the setup is completed and every required file is added, to run the script 
 python3 main.py title
 ```
 
-Where `title` will be the subject of the mails sent. Note that if `title` is ommited, the subject will be 'Sample Difussion'.
+Where `title` will be the subject of the mails sent. Note that if `title` is ommited, the subject will be 'Sample Diffusion'.
 
 ## Used Libraries
 

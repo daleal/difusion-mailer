@@ -3,4 +3,4 @@ credentials.json
 client_secret.json
 mail_list.csv
 template.txt
-parameters.py
+mail.json

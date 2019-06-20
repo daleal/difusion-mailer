@@ -1,0 +1,6 @@
+Dear {name} {last_name},
+
+We have heard that your company {enterprise} wants to buy food. Good for you.
+
+Sincerely,
+Someone.

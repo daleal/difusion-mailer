@@ -6,6 +6,7 @@ This module contains the necessary parameters to make the mailer work.
 import json
 
 
+MAIL_COLUMN_NAME = 'mail'
 DATABASE_LOCATION = ''
 TARGET_DATABASE = 'mail_list.csv'
 TEMPLATE_FILE = 'template.txt'

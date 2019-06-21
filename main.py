@@ -10,7 +10,7 @@ import requests
 from mailer import Mailer
 from data_getter import DataGetter
 from parameters import (MAIL_SENDER, DATABASE_LOCATION, TARGET_DATABASE,
-                        TEMPLATE_FILE, ATTACHMENTS_FOLDER)
+                        TEMPLATE_FILE, ATTACHMENTS_FOLDER, MAIL_COLUMN_NAME)
 
 
 mailer = Mailer()
@@ -28,9 +28,10 @@ def generate_message(template, subject, attachments, **kwargs):
     text = template.format(**kwargs)
     if not attachments:
         return mailer.create_text_message(
-            MAIL_SENDER, kwargs['mail'], subject, text)
+            MAIL_SENDER, kwargs[MAIL_COLUMN_NAME], subject, text)
     return mailer.create_attachments_message(
-        MAIL_SENDER, kwargs['mail'], subject, text + '\n\n', attachments)
+        MAIL_SENDER, kwargs[MAIL_COLUMN_NAME], subject, text + '\n\n',
+        attachments)
 
 
 def send_message(message):
@@ -51,6 +52,8 @@ if __name__ == '__main__':
         MESSAGE = generate_message(TEMPLATE, SUBJECT, ATTACHMENTS, **TARGET)
         STATUS = send_message(MESSAGE)
         if STATUS['worked']:
-            print('Message sent to {} successfully!\n'.format(TARGET['mail']))
+            print('Message sent to {} successfully!\n'.format(
+                TARGET[MAIL_COLUMN_NAME]))
         else:
-            print('Unable to send message to {}\n'.format(TARGET['mail']))
+            print('Unable to send message to {}\n'.format(
+                TARGET[MAIL_COLUMN_NAME]))

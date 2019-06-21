@@ -36,5 +36,5 @@ You can also change most of the naming requirements inside the _parameters.py_ f
 
 ## Considerations
 
-- The column which contains the mails to send the emails **MUST** be called `mail`.
+- The column which contains the mails to send the emails **MUST** be called `mail` by default, but it can be changed within _parameters.py_ to match the specific database.
 - The csv format can be changed within _parameters.py_ by changing the value `DELIMITER` for the separator and `SKIPINITIALSPACE` to specify an initial space after each delimiter.

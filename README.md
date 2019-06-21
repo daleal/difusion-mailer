@@ -28,6 +28,7 @@ python3 main.py
 - The script requires a file called _template.txt_ which is a template for the mail which is going to be sent. The template can use each of the target's name, last name, mail or enterprise inside the body just placing, for example, {name} where you want the name to appear.
 - The repository contains a _sample\_mail\_list.csv_ file and a _sample\_template.txt_ file for you to modify. Note that the names **MUST** be _mail\_list.csv_ and _template.txt_.
 - The script won't work without the setup being completed and the file _client\_secret.json_ being in the repository.
+- If you want to send attachments, you must put them in a folder inside the root of the repository named _attachments_.
 
 ## Usage
 
@@ -38,6 +39,8 @@ python3 main.py title
 ```
 
 Where `title` will be the subject of the mails sent. Note that if `title` is ommited, the subject will be 'Sample Diffusion'.
+
+You can also change most of the naming requirements inside the _parameters.py_ file if you want to do so.
 
 ## Used Libraries
 

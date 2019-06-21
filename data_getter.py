@@ -76,7 +76,7 @@ class DataGetter:
         """Loads the database."""
         path = self.__get_path(database_filename)
         with open(path, 'r', encoding='utf-8-sig') as database:
-            dat = csv.DictReader(database, skipinitialspace=True)
+            dat = csv.DictReader(database, delimiter=';')
             data = [x for x in map(dict, dat)]
         return data
 

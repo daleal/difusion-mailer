@@ -8,18 +8,13 @@ import sys
 import csv
 import requests
 from mailer import Mailer
-from parameters import MAIL_SENDER
+from data_getter import DataGetter
+from parameters import (MAIL_SENDER, DATABASE_LOCATION, TARGET_DATABASE,
+                        TEMPLATE_FILE, ATTACHMENTS_FOLDER)
 
 
 mailer = Mailer()
-
-
-def get_target_data():
-    """Loads the database."""
-    with open('mail_list.csv', 'r', encoding='utf-8-sig') as database:
-        dat = csv.DictReader(database, skipinitialspace=True)
-        data = [x for x in map(dict, dat)]
-    return data
+getter = DataGetter(DATABASE_LOCATION)
 
 
 def get_mail_title():
@@ -28,40 +23,18 @@ def get_mail_title():
     return 'Sample Diffusion' if not trailing else " ".join(trailing)
 
 
-def get_template():
-    """Loads the mail template from txt file."""
-    with open('template.txt', 'r', encoding='utf-8') as raw_template:
-        template = raw_template.read()
-    return template.strip()
+def generate_message(template, subject, attachments, **kwargs):
+    """Generates the adequate message depending on attachments."""
+    text = template.format(**kwargs)
+    if not attachments:
+        return mailer.create_text_message(
+            MAIL_SENDER, kwargs['mail'], subject, text)
+    return mailer.create_attachments_message(
+        MAIL_SENDER, kwargs['mail'], subject, text, attachments)
 
 
-def get_files():
-    """Loads the mail attachments."""
-    if not os.path.exists('attachments'):
-        return []
-    directory = os.fsencode(directory_in_str)
-    for attachment in os.listdir(directory):
-        filename = os.fsdecode(attachment)
-        print(filename)
-
-
-def generate_message(tamplate, subject, **kwargs):
-    """
-    Generates the message with the necessary information.
-    """
-    if not os.path.exists('attachments'):
-        pass
-
-
-def send_report(template, subject, **kwargs):
-    """
-    Generates the message with the necessary information and sends the mail.
-    """
-    text = template.format(name=kwargs['name'],
-                           last_name=kwargs['last_name'],
-                           enterprise=kwargs['enterprise'])
-    message = mailer.create_text_message(
-        MAIL_SENDER, kwargs['mail'], subject, text)
+def send_message(message):
+    """Sends the mail."""
     try:
         mailer.send_message(MAIL_SENDER, message)
     except requests.exceptions.ConnectionError:
@@ -71,10 +44,12 @@ def send_report(template, subject, **kwargs):
 
 if __name__ == '__main__':
     SUBJECT = get_mail_title()
-    TEMPLATE = get_template()
-    DATABASE = get_target_data()
+    TEMPLATE = getter.get_template(TEMPLATE_FILE)
+    DATABASE = getter.get_target_data(TARGET_DATABASE)
+    ATTACHMENTS = getter.get_attachments(ATTACHMENTS_FOLDER)
     for TARGET in DATABASE:
-        STATUS = send_report(TEMPLATE, SUBJECT, **TARGET)
+        MESSAGE = generate_message(TEMPLATE, SUBJECT, ATTACHMENTS, **TARGET)
+        STATUS = send_message(MESSAGE)
         if STATUS['worked']:
             print('Message sent to {} successfully!\n'.format(TARGET['mail']))
         else:

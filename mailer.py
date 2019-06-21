@@ -5,7 +5,7 @@ a Google Mail as the main function of the mailer.
 
 import base64
 from email.mime.text import MIMEText
-from email.mime.text import MIMEMultipart
+from email.mime.multipart import MIMEMultipart
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from httplib2 import Http
@@ -59,7 +59,8 @@ class Mailer:
         message.attach(msg)
         for attachment in attach:
             message.attach(attachment)
-        return {'raw': base64.urlsafe_b64encode(message.as_string())}
+        mess = base64.urlsafe_b64encode(message.as_bytes())
+        return {'raw': mess.decode('utf-8')}
 
 
 if __name__ == '__main__':

@@ -11,7 +11,8 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
-from parameters import DATABASE_LOCATION, ATTACHMENTS_FOLDER_NAME
+from email.mime.application import MIMEApplication
+from parameters import DATABASE_LOCATION, ATTACHMENTS_FOLDER
 
 
 class DataGetter:
@@ -50,6 +51,10 @@ class DataGetter:
             fp = open(file_path, 'rb')
             msg = MIMEText(fp.read(), _subtype=sub_type)
             fp.close()
+        elif main_type == 'application':
+            fp = open(file_path, 'rb')
+            msg = MIMEApplication(fp.read(), _subtype=sub_type)
+            fp.close()
         elif main_type == 'image':
             fp = open(file_path, 'rb')
             msg = MIMEImage(fp.read(), _subtype=sub_type)
@@ -82,7 +87,7 @@ class DataGetter:
             template = raw_template.read()
         return template.strip()
 
-    def get_files(self, folder_name):
+    def get_attachments(self, folder_name):
         """Loads the mail attachments."""
         paths = self.__get_file_paths(folder_name)
         return [self.__generate_file(x) for x in paths]
@@ -90,4 +95,4 @@ class DataGetter:
 
 if __name__ == '__main__':
     DATA_GETTER = DataGetter(DATABASE_LOCATION)
-    print(DATA_GETTER.get_files(ATTACHMENTS_FOLDER_NAME))
+    print(DATA_GETTER.get_attachments(ATTACHMENTS_FOLDER))

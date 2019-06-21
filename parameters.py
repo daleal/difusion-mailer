@@ -8,8 +8,8 @@ import json
 
 DATABASE_LOCATION = ''
 TARGET_DATABASE = 'mail_list.csv'
-
-ATTACHMENTS_FOLDER_NAME = 'attachments'
+TEMPLATE_FILE = 'template.txt'
+ATTACHMENTS_FOLDER = 'attachments'
 
 # Para usar el mailer, rellenar con el mail a usar
 MAIL_SENDER = ''

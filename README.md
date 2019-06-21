@@ -2,14 +2,6 @@
 
 A client to send emails to multiple directions programatically using Python
 
-## Execution
-
-To execute the script, just run the following:
-
-```python
-python3 main.py
-```
-
 ## Setup
 
 - Go into [this link](https://developers.google.com/gmail/api/quickstart/python) and click the button that reads "ENABLE THE GMAIL API", making sure to enter with the gmail account from which all the mails will be sent (this will create a project inside your google console, you want to remember the name. You can also change its name to your convenience).
@@ -42,18 +34,7 @@ Where `title` will be the subject of the mails sent. Note that if `title` is omm
 
 You can also change most of the naming requirements inside the _parameters.py_ file if you want to do so.
 
-## Used Libraries
+## Considerations
 
-- os
-- re
-- pip
-- sys
-- csv
-- json
-- email
-- base64
-- subprocess
-- requests
-- googleapiclient
-- httplib2
-- oauth2client
+- The column which contains the mails to send the emails **MUST** be called `mail`.
+- The csv format can be changed within _parameters.py_ by changing the value `DELIMITER` for the separator and `SKIPINITIALSPACE` to specify an initial space after each delimiter.

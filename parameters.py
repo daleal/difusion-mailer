@@ -10,6 +10,8 @@ DATABASE_LOCATION = ''
 TARGET_DATABASE = 'mail_list.csv'
 TEMPLATE_FILE = 'template.txt'
 ATTACHMENTS_FOLDER = 'attachments'
+DELIMITER = ';'
+SKIPINITIALSPACE = False
 
 # Para usar el mailer, rellenar con el mail a usar
 MAIL_SENDER = ''

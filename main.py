@@ -30,7 +30,7 @@ def generate_message(template, subject, attachments, **kwargs):
         return mailer.create_text_message(
             MAIL_SENDER, kwargs['mail'], subject, text)
     return mailer.create_attachments_message(
-        MAIL_SENDER, kwargs['mail'], subject, text, attachments)
+        MAIL_SENDER, kwargs['mail'], subject, text + '\n\n', attachments)
 
 
 def send_message(message):

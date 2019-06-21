@@ -12,7 +12,8 @@ from email.mime.image import MIMEImage
 from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
 from email.mime.application import MIMEApplication
-from parameters import DATABASE_LOCATION, ATTACHMENTS_FOLDER
+from parameters import (DATABASE_LOCATION, ATTACHMENTS_FOLDER, DELIMITER,
+                        SKIPINITIALSPACE)
 
 
 class DataGetter:
@@ -76,7 +77,10 @@ class DataGetter:
         """Loads the database."""
         path = self.__get_path(database_filename)
         with open(path, 'r', encoding='utf-8-sig') as database:
-            dat = csv.DictReader(database, delimiter=';')
+            dat = csv.DictReader(
+                database,
+                delimiter=DELIMITER,
+                skipinitialspace=SKIPINITIALSPACE)
             data = [x for x in map(dict, dat)]
         return data
 

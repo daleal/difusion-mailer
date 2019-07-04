@@ -16,9 +16,9 @@ A client to send emails to multiple directions programatically using Python
 
 ## Files Required
 
-- The script requires a file called _mail\_list.csv_ that, for the moment, must contain a header, be separated by a comma and a space and have the following columns: name, last_name, mail and enterprise.
+- The script requires a file called _mail\_list.csv_ containing data of every target.
 - The script requires a file called _template.txt_ which is a template for the mail which is going to be sent. The template can use each of the target's name, last name, mail or enterprise inside the body just placing, for example, {name} where you want the name to appear.
-- The repository contains a _sample\_mail\_list.csv_ file and a _sample\_template.txt_ file for you to modify. Note that the names **MUST** be _mail\_list.csv_ and _template.txt_.
+- The repository contains a _sample\_mail\_list.csv_ file and a _sample\_template.txt_ file for you to modify. Note that the file names **MUST** be _mail\_list.csv_ and _template.txt_.
 - The script won't work without the setup being completed and the file _client\_secret.json_ being in the repository.
 - If you want to send attachments, you must put them in a folder inside the root of the repository named _attachments_.
 
